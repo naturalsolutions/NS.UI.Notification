@@ -27,7 +27,7 @@ NS.UI = (function(ns) {
                 type: 'error',
                 title: 'Error',
                 message: 'An error occured',
-                delay: 7000
+                delay: 7
             });
             this.render();
         },
@@ -38,7 +38,7 @@ NS.UI = (function(ns) {
             var $html = $(template(data));
             this.setElement($html);
             $('ul.notification-list').append(this.el);
-            this.$el.slideDown().delay(this.options.delay).slideUp(400, function () {$(this).remove();});
+            this.$el.slideDown().delay(this.options.delay*1000).slideUp(400, function () {$(this).remove();});
         }
     });
 
