@@ -38,7 +38,10 @@ NS.UI = (function(ns) {
             var $html = $(template(data));
             this.setElement($html);
             $('ul.notification-list').append(this.el);
-            this.$el.slideDown().delay(this.options.delay*1000).slideUp(400, function () {$(this).remove();});
+            if (typeof(this.options.delay) === 'number' && this.options.delay > 0)
+                this.$el.slideDown().delay(this.options.delay*1000).slideUp(400, function () {$(this).remove();});
+            else
+                this.$el.slideDown();
         }
     });
 
