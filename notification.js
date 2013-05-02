@@ -20,7 +20,7 @@ NS.UI = (function(ns) {
     });
 
     ns.Notification = Backbone.View.extend({
-        templateSrc: '<li class="alert alert-<%- type %>"><button type="button" class="close" data-dismiss="alert">&times;</button><strong><%= title %></strong> <span class="message"><%= message %></span></li>',
+        templateSrc: '<li class="alert alert-<%- data.type %>"><button type="button" class="close" data-dismiss="alert">&times;</button><strong><%= data.title %></strong> <span class="message"><%= data.message %></span></li>',
 
         initialize: function(options) {
             this.options = _.defaults(options || {}, {
@@ -33,9 +33,8 @@ NS.UI = (function(ns) {
         },
 
         render: function() {
-            var template = _.template(this.templateSrc);
             var data = _.pick(this.options, 'type', 'title', 'message');
-            var $html = $(template(data));
+            var $html = $(_.template(this.templateSrc, data, {variable: 'data'}));
             this.setElement($html);
             $('ul.notification-list').append(this.el);
             if (typeof(this.options.delay) === 'number' && this.options.delay > 0)
